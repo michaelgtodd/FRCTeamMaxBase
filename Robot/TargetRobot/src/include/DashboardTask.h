@@ -13,7 +13,6 @@ public:
 	DashboardOSCMessage(std::string address, std::string value);
 	DashboardOSCMessage(std::string address, int value);
 	DashboardOSCMessage(std::string address, double value);
-private:
 	std::string Address = "NONE";
 	DashboardOSCMessageType MessageType = StringType;
 	std::string StringValue = "NONE";

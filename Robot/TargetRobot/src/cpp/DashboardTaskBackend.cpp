@@ -1,5 +1,8 @@
 #include "DashboardTask.h"
 #include "robotlib/RobotDataStream.h"
+#ifdef WIN32
+#include "FRCWindowsRobot.h"
+#endif
 
 SerialActionRunner DashboardTask::ActionRunner("DashboardRunner", 200);
 
@@ -110,6 +113,7 @@ void DashboardTask::ProcessOscData(const osc::ReceivedMessage& message)
 
 void DashboardTask::ProcessOscData(DashboardOSCMessage message)
 {
+	frc::ProcessSimulationOscData(message);
 	ActionRunner.queueAction(new DashboardOSCAction(message));
 }
 
