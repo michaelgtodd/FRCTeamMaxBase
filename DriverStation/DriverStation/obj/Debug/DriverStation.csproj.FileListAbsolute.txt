@@ -1,0 +1,15 @@
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\bin\Debug\DriverStation.exe.config
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\bin\Debug\DriverStation.exe
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\bin\Debug\DriverStation.pdb
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.csprojAssemblyReference.cache
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\MainWindow.g.cs
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\App.g.cs
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation_MarkupCompile.cache
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation_MarkupCompile.lref
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\MainWindow.baml
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.g.resources
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.Properties.Resources.resources
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.csproj.GenerateResource.cache
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.csproj.CoreCompileInputs.cache
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.exe
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.pdb

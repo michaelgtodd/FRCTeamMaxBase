@@ -3,7 +3,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows;
-using System.Windows.Data;
 
 namespace Dashboard
 {
@@ -12,7 +11,7 @@ namespace Dashboard
     {
         // Constants, such as ports.
         const int SendPortNumber = 5801;
-        const int ReceivePortNumber = 5802;
+        const int ReceivePortNumber = 55851;
 
         // OSC relevant variables.
         static OscReceiver Receiver;
@@ -67,34 +66,55 @@ namespace Dashboard
                         // Slap the packet in the most recent message variable.
                         App.Current.Dispatcher.InvokeAsync(() =>
                         {
-                            // Parses the packet into a message.
-                            OscMessage LatestMessage = OscMessage.Parse(Packet.ToString());
-
-                            // Overwrite any packets with the same address.
-                            bool MessageIsNew = true;
-                            foreach (OscData Message in ReceivedOscData)
+                            // Parses the packet into a message array.
+                            OscBundle MessageBundle = OscBundle.Parse(Packet.ToString());
+                            foreach (OscPacket MessagePacket in MessageBundle.ToArray())
                             {
-                                if (Message.Path == LatestMessage.Address)
+
+                                // Get the latest message.
+                                OscMessage LatestMessage = OscMessage.Parse(MessagePacket.ToString());
+
+                                // Determine if the message should be overwritten.
+                                bool OverwriteMessage = false;
+                                int OverwriteMessageIndex = 0;
+                                foreach (OscData Message in ReceivedOscData)
                                 {
-                                    int Index = ReceivedOscData.IndexOf(Message);
-                                    ReceivedOscData.RemoveAt(Index);
-                                    ReceivedOscData.Insert(Index, new OscData() { Path = LatestMessage.Address, Data = LatestMessage[0].ToString() });
-                                    MessageIsNew = false;
-                                    break;
+                                    if (Message.Path == LatestMessage.Address)
+                                    {
+                                        OverwriteMessageIndex = ReceivedOscData.IndexOf(Message);
+                                        OverwriteMessage = true;
+                                    }
+                                }
+
+                                // Cut the address out of the data string.
+                                string DataString = "";
+                                string[] DataArray = LatestMessage.ToString().Split(',');
+                                for (int i = 1; i < DataArray.Length; i++)
+                                {
+                                    DataString += DataArray[i];
+                                }
+
+                                // Add the message to the data grid, or overwrite its data.
+                                if (OverwriteMessage)
+                                {
+                                    ReceivedOscData.RemoveAt(OverwriteMessageIndex);
+                                    ReceivedOscData.Insert(OverwriteMessageIndex, new OscData() { Path = LatestMessage.Address, Data = DataString });
+                                }
+                                else
+                                {
+                                    ReceivedOscData.Add(new OscData() { Path = LatestMessage.Address, Data = DataString });
                                 }
                             }
-
-                            // Put the new packets into the data grid.
-                            if (MessageIsNew)
-                                ReceivedOscData.Add(new OscData() { Path = LatestMessage.Address, Data = LatestMessage[0].ToString() });
                         });
                     }
                 }
             }
             catch (Exception Ex)
             {
-                // Display the exeception.
-                MessageBox.Show(Ex.Message, "Exception Occurred", MessageBoxButton.OK, MessageBoxImage.Warning);
+                // Display the exeception if it occurred, while receiving.
+                if (Receiver.State == OscSocketState.Connected) {
+                    MessageBox.Show(Ex.Message, "Exception Occurred", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
 

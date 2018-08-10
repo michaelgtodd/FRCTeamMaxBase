@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="300">
-    <Grid Background="Gray">
-        <Label Content="Incoming Osc Data" Margin="10, 0, 10, 0" FontSize="16" FontWeight="Bold"/>
-        <DataGrid Name="OscDataGrid" ItemsSource="{Binding}" IsReadOnly="True" Margin="10, 30, 10, 10" Background="LightGray" HeadersVisibility="Column" ColumnWidth="*"/>
+        Title="MainWindow" Height="300" Width="450">
+    <Grid Background="LightGray">
+
+        <!-- Row Definitions and Grid Splitter -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch"/>
+
+        <!-- Incoming OSC Data Grid -->
+        <Label Content="Incoming Osc Data" Margin="10, 0, 10, 0" FontSize="16" FontWeight="Bold" Grid.Row="0"/>
+        <DataGrid Name="OscDataGrid" BorderBrush="Gray" BorderThickness="2" ItemsSource="{Binding}" IsReadOnly="True" Margin="10, 30, 10, 10" HeadersVisibility="Column" ColumnWidth="*" Grid.Row="0"/>
+
+        <!-- OSC Sending Section  -->
+        <Label Content="Sending Osc Data" Margin="10, 0, 10, 0" FontSize="16" FontWeight="Bold" Grid.Row="2"/>
+        <TextBox Name="OscPath" Margin="10, 30, 10, 10" Grid.Row="2"/>
+
     </Grid>
 </Window>

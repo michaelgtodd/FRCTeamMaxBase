@@ -1,0 +1,74 @@
+﻿<Window x:Class="DriverStation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DriverStation"
+        mc:Ignorable="d"
+        Title="OSC Driverstation" Height="200" Width="800">
+    <Grid Background="DimGray">
+
+        <!-- Subsytem Column and Grid Splitters -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter Background="Gray" Grid.Column="1" HorizontalAlignment="Stretch"/>
+        <GridSplitter Background="Gray" Grid.Column="3" HorizontalAlignment="Stretch"/>
+        <GridSplitter Background="Gray" Grid.Column="5" HorizontalAlignment="Stretch"/>
+
+        <!-- Driver Mode Selection -->
+        <Grid Grid.Column="0" Margin="10, 10, 10, 10">
+
+            <!-- Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Mode Buttons -->
+            <Button Name="TeleOpButton" Background="Gray" BorderBrush="Black" Click="ModeButtonClick" Grid.Row="0" Grid.ColumnSpan="2">
+                <TextBlock FontSize="14" Text="TeleOperated"/>
+            </Button>
+            <Button Name="AutoButton" Background="Gray" Click="ModeButtonClick" Grid.Row="1" Grid.ColumnSpan="2">
+                <TextBlock FontSize="14" Text="Autonomous"/>
+            </Button>
+            <Button Name="PracticeButton" Background="Gray" Click="ModeButtonClick" Grid.Row="2" Grid.ColumnSpan="2">
+                <TextBlock FontSize="14" Text="Practice"/>
+            </Button>
+            <Button Name="TestButton" Background="Gray" Click="ModeButtonClick" Grid.Row="3" Grid.ColumnSpan="2">
+                <TextBlock FontSize="14" Text="Test"/>
+            </Button>
+
+            <!-- Enable/Disable Buttons -->
+            <Button Background="Gray" Grid.Column="0" Grid.Row="5">
+                <TextBlock FontSize="16" FontWeight="Bold" Foreground="DarkGreen" Text="Enable"/>
+            </Button>
+            <Button Background="Gray" Grid.Column="1" Grid.Row="5">
+                <TextBlock FontSize="16" FontWeight="Bold" Foreground="DarkRed" Text="Disable"/>
+            </Button>
+        </Grid>
+
+        <!-- Enabe/Disable Buttons -->
+        <Grid Margin="10, 110, 590,10">
+
+
+        </Grid>
+
+    </Grid>
+</Window>
