@@ -13,3 +13,6 @@ C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug
 C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.csproj.CoreCompileInputs.cache
 C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.exe
 C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.pdb
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\bin\Debug\Rug.Osc.dll
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\bin\Debug\Rug.Osc.xml
+C:\Users\eltod\Source\Repos\FRCTeamMaxBase\DriverStation\DriverStation\obj\Debug\DriverStation.csproj.CopyComplete

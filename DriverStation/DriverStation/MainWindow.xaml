@@ -56,10 +56,10 @@
             </Button>
 
             <!-- Enable/Disable Buttons -->
-            <Button Background="Gray" Grid.Column="0" Grid.Row="5">
+            <Button Name="EnableButton" Background="Gray" Click="EnableStateClick" Grid.Column="0" Grid.Row="5">
                 <TextBlock FontSize="16" FontWeight="Bold" Foreground="DarkGreen" Text="Enable"/>
             </Button>
-            <Button Background="Gray" Grid.Column="1" Grid.Row="5">
+            <Button Name="DisableButton" Background="Gray" BorderBrush="Black" Click="EnableStateClick" Grid.Column="1" Grid.Row="5">
                 <TextBlock FontSize="16" FontWeight="Bold" Foreground="DarkRed" Text="Disable"/>
             </Button>
         </Grid>
