@@ -112,7 +112,7 @@ void TaskSchedule::AddLibraryTasks()
 	TaskContainer * DashboardSuperLoop = new TaskContainer();
 	DashboardSuperLoop->AddTask(new DashboardTask(), "DashboardTask");
 	DashboardSuperLoop->AddTask(new OSCReporter(), "OSCReporter");
-	TaskSchedule::AddTask(DashboardSuperLoop, "DashboardSuperLoop", 20);
+	TaskSchedule::AddTask(DashboardSuperLoop, "DashboardSuperLoop", 100);
 
 #if defined(TASK_METRICS) || defined (ACTION_METRICS)
 	TaskContainer * MetricsSuperLoop = new TaskContainer();

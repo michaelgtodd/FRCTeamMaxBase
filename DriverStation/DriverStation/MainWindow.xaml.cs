@@ -1,6 +1,7 @@
 ﻿using Rug.Osc;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,13 +11,29 @@ using System.Windows.Media;
 
 namespace DriverStation
 {
+    // Enabled or disabled enumeration.
+    enum EnableState { Disable = 1, Enable = 0 }
 
-    enum EnableState { Enable = 0, Disable = 1 }
-
+    // Drive mode enumeration.
     enum DriveMode { TeleOP = 0, Auto = 1, Practice = 2, Test = 3 }
+
+    // Class for various configuration settings.
+    public class ConfigurationSetting {
+        public string Setting { get; set; }
+        public string Value { get; set; }
+
+        public ConfigurationSetting(string InitialName, string InitialValue)
+        {
+            Setting = InitialName;
+            Value = InitialValue;
+        }
+    }
 
     public partial class MainWindow : Window
     {
+        // List of all configurations.
+        public ObservableCollection<ConfigurationSetting> ConfigurationList;
+
         // The list of mode buttons.
         List<Button> ButtonList;
 
@@ -50,9 +67,21 @@ namespace DriverStation
             var Interval = TimeSpan.FromMilliseconds(20);
 
             // Start the On Tick process.
-#pragma warning disable 4014
             RunPeriodicAsync(OnTick, DueTime, Interval, CancellationToken.None);
-#pragma warning restore 4014
+            
+            // Set all of the configuration data's default values.
+            ConfigurationList = new ObservableCollection<ConfigurationSetting>()
+            {
+                new ConfigurationSetting("Team Number", "0000"),
+                new ConfigurationSetting("Countdown Time", "5"),
+                new ConfigurationSetting("Autonomous Time", "15"),
+                new ConfigurationSetting("Delay Time", "1"),
+                new ConfigurationSetting("TeleOperated Time", "105"),
+                new ConfigurationSetting("End Game Time", "30"),
+            };
+
+            // Put the configuration data into the data grid.
+            ConfigurationDataGrid.ItemsSource = ConfigurationList;
         }
 
         // Event handler for when the mode button is clicked.
@@ -122,10 +151,16 @@ namespace DriverStation
         // Method run every tick. Should be 50 ticks per second.
         private void OnTick()
         {
+            // Get the robot number.
+            string TeamNumber = "";
+            foreach (ConfigurationSetting Configuration in ConfigurationList)
+            {
+                if (Configuration.Setting == "Team Number")
+                    TeamNumber = Configuration.Value;
+            }
 
-            // Send the enable state and the drive mode.
-
-            OscSenderInstance.Send(new OscMessage("/EnableState", (int)RobotEnableState, (int)RobotDriveMode));
+            // Sends all the driver station data.
+            OscSenderInstance.Send(new OscMessage("/" + TeamNumber + "/EnableState", (int)RobotEnableState, (int)RobotDriveMode));
         }
     }
 }

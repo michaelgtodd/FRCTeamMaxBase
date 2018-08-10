@@ -3,8 +3,21 @@
 #ifdef WIN32
 #include "FRCWindowsRobot.h"
 #endif
+#include <iostream>
+#include <fstream>
+
+bool initialized = false;
+std::ofstream file;
+bool receivedheader = false;
+
+void initializeFile()
+{
+	file.open("output.txt");
+}
 
 SerialActionRunner DashboardTask::ActionRunner("DashboardRunner", 200);
+
+
 
 DashboardOSCMessage::DashboardOSCMessage(std::string address, std::string value)
 {
@@ -67,7 +80,51 @@ protected:
 		(void)remoteEndpoint;
 
 		try {
-			DashboardTask::ProcessOscData(message);
+
+			//osc::ReceivedMessageArgument; 
+			osc::ReceivedMessageArgumentIterator arg = message.ArgumentsBegin();
+
+			std::string address(message.AddressPattern());
+
+			if (address == "/LogHeader")
+			{
+				if (!receivedheader)
+				{
+					initializeFile();
+					bool firstpassed = false;
+					while (arg != message.ArgumentsEnd())
+					{
+						if (firstpassed)
+							file << ",";
+						file << arg->AsString();
+						firstpassed = true;
+						arg++;
+					}
+					file << std::endl;
+					receivedheader = true;
+					std::cout << "Got Header. " << std::endl;
+				}
+			}
+			else if (address == "/LogData")
+			{
+				if (receivedheader) {
+					bool firstpassed = false;
+					while (arg != message.ArgumentsEnd())
+					{
+						if (firstpassed)
+							file << ",";
+						file << arg->AsDouble();
+						firstpassed = true;
+						arg++;
+					}
+					file << std::endl;
+				}
+				else
+				{
+				}
+			}
+
+			//DashboardTask::ProcessOscData(message);
 		}
 		catch (...) {
 			std::stringstream output;
